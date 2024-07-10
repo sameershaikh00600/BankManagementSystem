@@ -151,7 +151,7 @@ setVisible(true);
 }
      public void  actionPerformed(ActionEvent e)
    { 
-       //enter those values which you want to enterr in db
+       //enter those values which you want to enterr in database
     String formno=" "+random;
        String myreligion= (String) religion.getSelectedItem();
        String edu_details=ftxt.getText();

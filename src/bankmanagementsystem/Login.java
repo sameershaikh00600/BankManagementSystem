@@ -80,8 +80,10 @@ public class Login extends JFrame implements ActionListener {
     public static void main(String[] args)
     {
         
-        new Login();
-        new signup().setVisible(false);
+       new Login();
+        //new signup().setVisible(false);
+        //new signup3().setVisible(false);
+        
         
     }
 
