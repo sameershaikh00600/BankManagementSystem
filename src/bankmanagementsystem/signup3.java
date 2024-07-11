@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 
-public class signup3 extends JFrame  {
+public class signup3 extends JFrame implements ActionListener {
     String formno;
     JLabel l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12;
      JPasswordField pf2;
@@ -84,24 +84,22 @@ public class signup3 extends JFrame  {
            Button2.setBackground(Color.BLACK);
            Button2.setForeground(Color.WHITE);
             Button1.setBounds(250,720,100,30);
-             Button1.setBounds(420,720,100,30);
+             Button2.setBounds(420,720,100,30);
         add(Button1);
-            
-       
-           add(Button2);
+            add(Button2);
            checkbox1 = new JCheckBox("ATM CARD");
            checkbox1.setBackground(Color.WHITE);
            checkbox1.setFont(new Font("Raleway", Font.BOLD, 16));
          
            checkbox1.setBounds(100,500,200,30);
-        add(   checkbox1);
+        add(checkbox1);
         
            checkbox2 = new JCheckBox("Internet Banking");
            checkbox2.setBackground(Color.WHITE);
            checkbox2.setFont(new Font("Raleway", Font.BOLD, 16));
         
            checkbox2.setBounds(350,500,200,30);
-        add(   checkbox2);
+        add(checkbox2);
         
             checkbox3 = new JCheckBox("Mobile Banking");
            checkbox3.setBackground(Color.WHITE);
@@ -156,16 +154,19 @@ public class signup3 extends JFrame  {
         groupgender.add(   Radio2);
         groupgender.add(   Radio3);
         groupgender.add(   Radio4);
-        
+        setLayout(null);
          getContentPane().setBackground(Color.WHITE);
          setSize(850,850);
         setLocation(500,120);
         //setVisible(true);
+          Button1.addActionListener(this);
+        Button2.addActionListener(this);
         
         
         
         
-        
+//        Button1.addActionListener(this);
+//        Button2.addActionListener(this);
         
         
         
@@ -173,7 +174,7 @@ public class signup3 extends JFrame  {
         
     }
      
-     public void ActionPerformed(ActionEvent e)
+     public void actionPerformed(ActionEvent e)
      {  String radio=null;
      if(Radio1.isSelected())
      {  
@@ -192,11 +193,64 @@ public class signup3 extends JFrame  {
       radio="Recurring Deposit Account";
      }
          
-            
+         Random random=new Random();
+         String cardNumber= ""+Math.abs((random.nextLong() %90000000L))+5040936000000000L;
+         String pinNumber= ""+Math.abs((random.nextLong() %90000000L))+1000L;
+         String facility="";
+         if(checkbox1.isSelected())
+         {
+             facility=facility + "ATM CARD";
+         }
+         else if(checkbox2.isSelected())
+         {
+           facility=facility+"Internet Banking";
+           
+         }
+         else if(checkbox3.isSelected())
+         {
+            facility=facility +"Mobile Banking";
+         }
+         else if(checkbox4.isSelected())
+         {
+             facility=facility+"Email & sms Alerts";
+         }
+         else if(checkbox5.isSelected())
+         {
+            facility=facility+"cheque book";
+         }
+          else if(checkbox6.isSelected())
+         {
+            facility=facility+"K statement";
+         }
+         
+         try{
+         
+if(e.getSource()==Button1)
+{
+          if(radio.equals(""))
+             {
+             JOptionPane.showMessageDialog(null, "Fill all the required fields");
+                }
+          else
+          {
+          conn c1=new conn();
+         // String q1="insert into signup3 values('"+formno+"','"+radio+"','"+cardNumber+"','"+pinNumber+"','"+facility+"')";
+            String q1 ="insert into signup3 values('" + formno + "','" + radio + "','" + cardNumber + "','" + pinNumber + "','" + facility + "')";
+
+          c1.stmt.executeUpdate(q1);
+          }
+         }
+else if(e.getSource()==Button2) System.exit(0);
+         }
+         catch(Exception s)
+         {
+        // System.out.println(e);}
+             s.printStackTrace();
+         }
      }
     public static void main(String[] args)
     {
-        new signup3("1123");
+       // new signup3("1123");
     }
     
 }

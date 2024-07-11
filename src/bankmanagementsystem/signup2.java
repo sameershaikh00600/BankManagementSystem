@@ -177,7 +177,8 @@ setVisible(true);
            conn c2=new conn();
             String q2= "insert into signup2 values('"+myreligion+"','"+mycat+"','"+panno+"','"+aadharno+"','"+income+"','"+ciniorcitizens+"','"+edu_details+"')";
            c2.stmt.executeUpdate(q2);
-           
+           setVisible(false);
+           new signup3(formno).setVisible(true);
            
            
        }  
